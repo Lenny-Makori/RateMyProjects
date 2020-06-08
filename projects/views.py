@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Project, Profile
 from .forms import ProfileForm, ProjectForm
 from django.contrib.auth.decorators import login_required
@@ -47,3 +47,19 @@ def new_project(request):
     else:
         form = ProjectForm()
     return render(request, 'new_project.html', {'form': form})
+
+
+def review_project(request, project_id):
+    image = get_object_or_404(Project, id=project_id)
+    current_user = request.user
+    if request.method == 'POST':
+            reviewform = ProjectForm(request.POST, request.FILES)
+            if reviewform.is_valid:
+                review = reviewform.save(commit=False)
+                review.user = current_user
+                review.project = project
+                review.save()
+            return redirect('projectview')
+    else:
+        commentform = ProjectForm()
+    return render(request, 'project_review.html', {"form": reviewform})
