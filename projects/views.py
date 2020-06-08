@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Project, Profile
 from .forms import ProfileForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -9,11 +10,13 @@ def index(request):
 
     return render(request, 'mainview/mainpage.html', {"image_display":test})
 
+@login_required(login_url='/accounts/login/')
 def profile(request, user_id):
     user_profile = Profile.get_profile(user_id)
 
     return render(request, 'profile.html', {'user_profile':user_profile})
 
+@login_required(login_url='/accounts/login/')
 def update_profile(request, user_id):
     current_user = request.user
     current_user_id = current_user.id
