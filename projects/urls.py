@@ -11,6 +11,7 @@ urlpatterns=[
     path('profile/edit/<user_id>', views.update_profile, name = 'profileedit'),
     path('new/project', views.new_project, name='new_project'),
     path('review/<project_id>', views.review_project, name='review'),
+    path('api/profiles/', views.ProfileList.as_view())
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

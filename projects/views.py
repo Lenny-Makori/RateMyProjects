@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Project, Profile, review
 from .forms import ProfileForm, ProjectForm, ReviewForm
 from django.contrib.auth.decorators import login_required
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializer import ProfileSerializer
 
 # Create your views here.
 
@@ -78,3 +81,9 @@ def review_project(request, project_id):
     else:
         reviewform = ReviewForm()
     return render(request, 'project_review.html', {"form": reviewform})
+
+class ProfileList(APIView):
+    def get(self, request, format=None):
+        all_merch = Profile.objects.all()
+        serializers = ProfileSerializer(all_merch, many=True)
+        return Response(serializers.data)
