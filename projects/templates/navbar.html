@@ -16,36 +16,38 @@
 
       <div class="col-sm-6 col-md-6">
         {% if user.is_authenticated %}
-        <ul>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle btn btn-default navbar-right" data-toggle="dropdown" role="button" aria-expanded="false">Account
-                      <span class="caret"></span>
-                  </a>
-            <ul class="dropdown-menu" role="menu">
-              <li>
-                <a href="{%url 'homepage'%}">Home</a>
-              </li>
-              <li>
-                <a href="{% url 'new_project' %}">Add a Project</a>
-              </li>
-              <!-- <li>
-                <a href="/accounts/password/change">Change Password</a>
-              </li> -->
-              <li>
-                <a href="/admin/">Admin Dashboard</a>
-              </li>
-              <li>
-                <a href="/logout">Logout</a>
-              </li>
-            </ul>
-          </li>
-        </ul>
+        
+        <div class="container">
+          <div class="dropdown navbar-right">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+              Account
+            </button>
+            <div class="dropdown-menu">
+              <a href="{%url 'homepage'%}">Home</a><br>
+              <a href="{% url 'new_project' %}">Add a Project</a><br>
+              <a href="/admin/">Admin Dashboard</a><br>
+              <a href="/logout">Logout</a>
+            </div>
+          </div>
+        </div>
+        
         {% else %}
         <li>
-          <a class='btn btn-default' href="/accounts/login">Login</a>
+          <a class='btn btn-primary' href="/accounts/login">Login</a>
         </li>
 
         {% endif %}
+      </div>
+      <div class="container">
+        <div class="dropdown navbar-right">
+          <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+            APIs
+          </button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="{%url 'profilesApi' %}">Profiles API</a><br>
+            <a class="dropdown-item" href="{%url 'projectsApi' %}">Projects API</a>
+          </div>
+        </div>
       </div>
       <div>
         {% if user.is_authenticated %}
