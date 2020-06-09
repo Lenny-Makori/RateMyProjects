@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="{% url 'homepage' %}">Project-Review</a>
@@ -24,6 +24,7 @@
             </button>
             <div class="dropdown-menu">
               <a href="{%url 'homepage'%}">Home</a><br>
+              <a href="{%url 'profileview' user_id=user.id%}">View Profile</a><br>
               <a href="{% url 'new_project' %}">Add a Project</a><br>
               <a href="/admin/">Admin Dashboard</a><br>
               <a href="/logout">Logout</a>
@@ -44,8 +45,8 @@
             APIs
           </button>
           <div class="dropdown-menu">
-            <a class="dropdown-item" href="{%url 'profilesApi' %}">Profiles API</a><br>
-            <a class="dropdown-item" href="{%url 'projectsApi' %}">Projects API</a>
+            <a class="dropdown-item" href="{%url 'profilesApi' %}" target="blank">Profiles API</a><br>
+            <a class="dropdown-item" href="{%url 'projectsApi' %}" target="blank">Projects API</a>
           </div>
         </div>
       </div>
