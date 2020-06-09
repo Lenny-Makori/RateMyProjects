@@ -3,29 +3,29 @@
  {% block content %}
  <div class="container">
   <div class="row">
-    <h1 class="text-center">{{image.image_name}}</h1>
+    <h1 class="text-center">{{project.project_name}}</h1>
   </div>
 
    <div class="row">
-     <img src="{{image.image.url}}"  class="img-responsive" alt="" style="max-width:800px;">
+     <img src="{{project.project_image.url}}"  class="img-responsive" alt="" style="max-width:800px;">
    </div>
 
   <div class="row">
-      <h3>{{image.image_caption}}</h3>
+      <h3>{{project.project_description}}</h3>
   </div>
   <div class="row">
-    <h4>Comments</h4>
-    {%for comment in image_comments%}
+    <h4>Reviews</h4>
+    {%for review in project_review%}
     <div class="card" style="width: 18rem;">
       <ul class="list-group list-group-flush">
-        <li class="list-group-item">{{comment.comment}}</li>
+        <li class="list-group-item">{{review.review}}</li>
       </ul>
     </div>
     {%endfor%}
   </div>
 
   <div class="row">
-    <a href="{% url 'comment' image_id=image.id %}" class='btn btn-outline-danger'>Add Comment</a>
+    <a href="{% url 'review' project_id=project.id %}" class='btn btn-outline-danger'>Add Review</a>
   </div>
 
 </div>

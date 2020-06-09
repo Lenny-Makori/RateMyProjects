@@ -18,7 +18,7 @@ def profile(request, user_id):
 
     projects = Project.get_projects_of_user(current_user)
 
-    return render(request, 'profile.html', {'user_profile':user_profile})
+    return render(request, 'profile.html', {'user_profile':user_profile, "projects": projects})
 
 @login_required(login_url='/accounts/login/')
 def update_profile(request, user_id):
@@ -44,7 +44,7 @@ def project(request,project_id):
         project_review = review.display_reviews(project_id)
     except DoesNotExist:
         raise Http404()
-    return render(request, "mainview/project.html", {"project": project, "project_reviews": project_reviews})
+    return render(request, "mainview/project.html", {"project": project, "project_reviews": project_review})
 
 
 @login_required(login_url='/accounts/login/')
@@ -74,5 +74,5 @@ def review_project(request, project_id):
                 review.save()
             return redirect('projectview')
     else:
-        commentform = ProjectForm()
+        reviewform = ProjectForm()
     return render(request, 'project_review.html', {"form": reviewform})

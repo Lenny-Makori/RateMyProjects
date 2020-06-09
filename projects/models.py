@@ -44,3 +44,9 @@ class review(models.Model):
     review = models.CharField(max_length=100)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
+
+    @classmethod
+    def display_reviews(cls, project_id):
+        reviews = cls.objects.filter(project=project_id)
+
+        return reviews
