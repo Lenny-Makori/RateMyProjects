@@ -72,7 +72,7 @@ def review_project(request, project_id):
                 review.user = current_user
                 review.project = project
                 review.save()
-            return redirect('projectview')
+            return redirect('projectview', project_id=project_id)
     else:
         reviewform = ReviewForm()
     return render(request, 'project_review.html', {"form": reviewform})

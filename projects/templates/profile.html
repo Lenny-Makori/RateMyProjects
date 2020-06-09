@@ -20,11 +20,12 @@
     {%for item in projects%}
 <div class="col-sm-6  col-md-4">
     <div class="thumbnail">
-        {{item.project_image.url}}
+        <h3>{{item.project_title}}</h3>
         <a href="{% url 'projectview' item.id %}"><img id='myImg' src="{{item.project_image.url}}" class="img-responsive myImg" alt="Image" data-toggle="modal" data-target="#exampleModal{{item.id}}"class="img-responsive" alt="Image" style="max-width:300px;"></a>
         <div class="caption">
-            <h3>{{item.project_name}}</h3>
+           
             <p>{{item.project_description| truncatechars:25}}.</p>
+            <a href="{{item.project_link}}">Link to app</a>
             <p>{{item.pub_date}}</p>
 
             
