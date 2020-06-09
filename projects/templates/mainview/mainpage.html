@@ -1,10 +1,12 @@
 {%extends 'mainview/base.html'%}
 {% block content %}
 <h1>Projects-Review</h1>
+<div id="intro"></div>
 {%for item in image_display%}
 <div class="col-sm-6  col-md-4">
     <div class="thumbnail">
-        <a href="{% url 'projectview' image_id=item.id %}"><img id='myImg' src="{{item.image.url}}" class="img-responsive myImg" alt="Image" data-toggle="modal" data-target="#exampleModal{{item.id}}"class="img-responsive" alt="Image" style="max-width:300px;"></a>
+        {{item.project_image.url}}
+        <a href="{% url 'projectview' item.id %}"><img id='myImg' src="{{item.project_image.url}}" class="img-responsive myImg" alt="Image" data-toggle="modal" data-target="#exampleModal{{item.id}}"class="img-responsive" alt="Image" style="max-width:300px;"></a>
         <div class="caption">
             <h3>{{item.image_name}}</h3>
             <p>{{item.image_caption| truncatechars:25}}.</p>
@@ -16,7 +18,7 @@
     </div>
 </div>
 {%endfor%}
-{% for comment in comments %}
+{% for comment in reviews %}
         <p>@{{comment.user.username}} - {{comment.comment}} </p>
 {% endfor %}
 {%endblock%}

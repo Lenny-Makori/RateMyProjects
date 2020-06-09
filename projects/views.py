@@ -6,13 +6,17 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def index(request):
-    test = "Nakucheki nakudigi"
+    test = Project.objects.all()
+    
 
     return render(request, 'mainview/mainpage.html', {"image_display":test})
 
 @login_required(login_url='/accounts/login/')
 def profile(request, user_id):
+    current_user = request.user
     user_profile = Profile.get_profile(user_id)
+
+    projects = Project.get_projects_of_user(current_user)
 
     return render(request, 'profile.html', {'user_profile':user_profile})
 

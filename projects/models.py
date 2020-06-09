@@ -33,6 +33,12 @@ class Project(models.Model):
     profile = models.ForeignKey(User, on_delete=models.CASCADE)
     pub_date = models.DateTimeField(auto_now_add=True)
 
+    @classmethod
+    def get_projects_of_user(cls, user_id):
+        project = cls.objects.filter(profile=user_id)
+
+        return project
+
 
 class review(models.Model):
     review = models.CharField(max_length=100)
