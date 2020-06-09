@@ -63,7 +63,7 @@ def new_project(request):
 
 
 def review_project(request, project_id):
-    image = get_object_or_404(Project, id=project_id)
+    project = get_object_or_404(Project, id=project_id)
     current_user = request.user
     if request.method == 'POST':
             reviewform = ReviewForm(request.POST, request.FILES)
