@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Project, Profile, review
-from .forms import ProfileForm, ProjectForm
+from .forms import ProfileForm, ProjectForm, ReviewForm
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -66,7 +66,7 @@ def review_project(request, project_id):
     image = get_object_or_404(Project, id=project_id)
     current_user = request.user
     if request.method == 'POST':
-            reviewform = ProjectForm(request.POST, request.FILES)
+            reviewform = ReviewForm(request.POST, request.FILES)
             if reviewform.is_valid:
                 review = reviewform.save(commit=False)
                 review.user = current_user
@@ -74,5 +74,5 @@ def review_project(request, project_id):
                 review.save()
             return redirect('projectview')
     else:
-        reviewform = ProjectForm()
+        reviewform = ReviewForm()
     return render(request, 'project_review.html', {"form": reviewform})
