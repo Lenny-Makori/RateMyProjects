@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
+@login_required(login_url='/accounts/login/')
 def index(request):
     test = Project.objects.all()
     
@@ -62,6 +63,7 @@ def new_project(request):
     return render(request, 'new_project.html', {'form': form})
 
 
+@login_required(login_url='/accounts/login/')
 def review_project(request, project_id):
     project = get_object_or_404(Project, id=project_id)
     current_user = request.user
