@@ -37,4 +37,4 @@ class Project(models.Model):
 class review(models.Model):
     review = models.CharField(max_length=100)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    image = models.ForeignKey(Image, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)

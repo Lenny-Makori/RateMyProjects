@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Project, Profile
+from .models import Project, Profile, review
 from .forms import ProfileForm, ProjectForm
 from django.contrib.auth.decorators import login_required
 
@@ -32,6 +32,15 @@ def update_profile(request, user_id):
         form = ProfileForm()
 
     return render(request, 'profile_edit.html', {"form": form})
+
+@login_required(login_url='/accounts/login/')
+def project(request,project_id):
+    try:
+        project = Project.objects.get(id = project_id)
+        project_review = review.display_reviews(project_id)
+    except DoesNotExist:
+        raise Http404()
+    return render(request, "mainview/project.html", {"project": project, "project_reviews": project_reviews})
 
 
 @login_required(login_url='/accounts/login/')
